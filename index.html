@@ -1,0 +1,1920 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Clase Magistral: Operaciones Fundamentales con Fracciones</title>
+  <style>
+    :root {
+      --bg: #f4f7fb;
+      --surface: #ffffff;
+      --surface-alt: #eef3fa;
+      --text: #1b2432;
+      --muted: #526075;
+      --primary: #2563eb;
+      --primary-dark: #1d4ed8;
+      --accent: #0d9488;
+      --success: #15803d;
+      --success-bg: #dcfce7;
+      --error: #b91c1c;
+      --error-bg: #fee2e2;
+      --border: #dbe3ef;
+      --shadow: 0 8px 24px rgba(27, 36, 50, 0.06);
+      --radius: 14px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      background-color: var(--bg);
+      color: var(--text);
+      line-height: 1.65;
+      padding-bottom: 4rem;
+    }
+
+    header.hero {
+      background: linear-gradient(135deg, #1e3a8a 0%, #2563eb 55%, #0d9488 100%);
+      color: #ffffff;
+      padding: 3rem 1.5rem;
+      text-align: center;
+      box-shadow: var(--shadow);
+    }
+
+    header.hero h1 {
+      font-size: clamp(1.8rem, 3.5vw, 2.6rem);
+      font-weight: 800;
+      margin-bottom: 0.6rem;
+      letter-spacing: -0.02em;
+    }
+
+    header.hero p {
+      font-size: 1.05rem;
+      max-width: 720px;
+      margin: 0 auto 1.2rem;
+      opacity: 0.95;
+    }
+
+    .progress-bar-container {
+      max-width: 680px;
+      margin: 0 auto;
+      background: rgba(255, 255, 255, 0.2);
+      border-radius: 999px;
+      padding: 0.35rem;
+    }
+
+    .progress-bar-fill {
+      height: 12px;
+      width: 0%;
+      background: #4ade80;
+      border-radius: 999px;
+      transition: width 0.3s ease;
+    }
+
+    .progress-label {
+      margin-top: 0.5rem;
+      font-size: 0.92rem;
+      font-weight: 600;
+    }
+
+    nav.toc {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid var(--border);
+      padding: 0.7rem 1rem;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 0.5rem;
+    }
+
+    nav.toc a {
+      text-decoration: none;
+      color: var(--text);
+      font-size: 0.88rem;
+      font-weight: 600;
+      padding: 0.4rem 0.8rem;
+      border-radius: 8px;
+      background: var(--surface-alt);
+      transition: all 0.2s ease;
+    }
+
+    nav.toc a:hover {
+      background: var(--primary);
+      color: #ffffff;
+    }
+
+    main.container {
+      max-width: 960px;
+      margin: 2rem auto 0;
+      padding: 0 1.25rem;
+    }
+
+    section.card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 2rem;
+      margin-bottom: 2rem;
+      box-shadow: var(--shadow);
+    }
+
+    h2.module-title {
+      font-size: 1.65rem;
+      color: var(--primary-dark);
+      border-bottom: 2px solid var(--surface-alt);
+      padding-bottom: 0.5rem;
+      margin-bottom: 1.25rem;
+    }
+
+    h3.sub-title {
+      font-size: 1.25rem;
+      color: var(--accent);
+      margin: 1.5rem 0 0.75rem;
+    }
+
+    h4.mini-title {
+      font-size: 1.05rem;
+      color: var(--text);
+      margin: 1.1rem 0 0.5rem;
+    }
+
+    p {
+      margin-bottom: 0.85rem;
+    }
+
+    ul, ol {
+      margin: 0.5rem 0 1rem 1.5rem;
+    }
+
+    li {
+      margin-bottom: 0.4rem;
+    }
+
+    .example-box {
+      background: var(--surface-alt);
+      border-left: 4px solid var(--primary);
+      border-radius: 8px;
+      padding: 1rem 1.2rem;
+      margin: 1rem 0 1.25rem;
+    }
+
+    .example-box strong.label {
+      color: var(--primary-dark);
+      display: block;
+      margin-bottom: 0.35rem;
+    }
+
+    .math-line {
+      font-weight: 700;
+      font-size: 1.02rem;
+      color: #0f172a;
+      background: #ffffff;
+      display: inline-flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 0.35em;
+      padding: 0.45rem 0.75rem;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+      margin: 0.25rem 0;
+      max-width: 100%;
+    }
+
+    /* Fracciones apiladas tipo matemático */
+    .frac {
+      display: inline-flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      vertical-align: middle;
+      line-height: 1.1;
+      margin: 0 0.14em;
+      font-family: "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      font-weight: 700;
+    }
+    .frac .num {
+      padding: 0 0.28em 0.14em 0.28em;
+      border-bottom: 2px solid currentColor;
+      font-size: 0.9em;
+      text-align: center;
+      white-space: nowrap;
+    }
+    .frac .den {
+      padding: 0.14em 0.28em 0 0.28em;
+      font-size: 0.9em;
+      text-align: center;
+      white-space: nowrap;
+    }
+
+    /* Fracciones rellenables para procedimientos y respuestas */
+    .frac-box {
+      display: inline-flex;
+      flex-direction: column;
+      align-items: center;
+      vertical-align: middle;
+      margin: 0 0.15em;
+      background: #ffffff;
+      padding: 0.2rem 0.3rem;
+      border-radius: 8px;
+      border: 1px solid #d5dfec;
+    }
+    .frac-box .frac-line-bar {
+      width: 100%;
+      height: 2px;
+      background: #334155;
+      margin: 0.2rem 0;
+      border-radius: 2px;
+    }
+    .step-input {
+      width: 44px;
+      height: 28px;
+      text-align: center;
+      border: 1.5px solid #cbd5e1;
+      border-radius: 5px;
+      font-family: "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      font-size: 0.9rem;
+      font-weight: 700;
+      color: var(--text);
+      background: #f8fafc;
+      padding: 0 2px;
+    }
+    .step-input.wide {
+      width: 82px;
+      font-size: 0.84rem;
+    }
+    .step-input.med {
+      width: 64px;
+      font-size: 0.86rem;
+    }
+    .step-input:focus {
+      outline: none;
+      border-color: var(--primary);
+      background: #ffffff;
+      box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.18);
+    }
+    .step-input.correct, .final-input.correct {
+      border-color: var(--success) !important;
+      background: var(--success-bg) !important;
+      color: var(--success) !important;
+    }
+    .step-input.incorrect, .final-input.incorrect {
+      border-color: var(--error) !important;
+      background: var(--error-bg) !important;
+      color: var(--error) !important;
+    }
+
+    .final-input {
+      width: 50px;
+      height: 30px;
+      text-align: center;
+      border: 2px solid #93c5fd;
+      border-radius: 6px;
+      font-family: "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      font-size: 0.95rem;
+      font-weight: 800;
+      color: var(--primary-dark);
+      background: #eff6ff;
+      padding: 0 2px;
+    }
+    .final-input:focus {
+      outline: none;
+      border-color: var(--primary);
+      background: #ffffff;
+      box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.2);
+    }
+
+    .expr-row {
+      display: inline-flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 0.28em;
+      vertical-align: middle;
+    }
+
+    .exercises-block {
+      margin-top: 1.5rem;
+      padding-top: 1.25rem;
+      border-top: 2px dashed var(--border);
+    }
+
+    .exercises-header {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: 0.75rem;
+      margin-bottom: 1rem;
+    }
+
+    .exercises-header h4 {
+      font-size: 1.12rem;
+      color: var(--primary-dark);
+    }
+
+    .btn-group {
+      display: flex;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+    }
+
+    button {
+      cursor: pointer;
+      border: none;
+      border-radius: 8px;
+      padding: 0.48rem 0.85rem;
+      font-size: 0.88rem;
+      font-weight: 600;
+      transition: all 0.2s ease;
+    }
+
+    .btn-check {
+      background: var(--primary);
+      color: #ffffff;
+    }
+
+    .btn-check:hover {
+      background: var(--primary-dark);
+    }
+
+    .btn-hint {
+      background: var(--surface-alt);
+      color: var(--text);
+      border: 1px solid var(--border);
+    }
+
+    .btn-hint:hover {
+      background: #dfe8f5;
+    }
+
+    .btn-clear {
+      background: #f1f5f9;
+      color: var(--muted);
+      border: 1px solid var(--border);
+    }
+
+    .btn-clear:hover {
+      background: #e2e8f0;
+      color: var(--text);
+    }
+
+    .exercise-item {
+      display: flex;
+      flex-direction: column;
+      gap: 0.65rem;
+      padding: 1rem 1.05rem;
+      border-radius: 12px;
+      background: #fafcff;
+      border: 1px solid var(--border);
+      margin-bottom: 0.95rem;
+    }
+
+    .exercise-top-row {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.65rem;
+    }
+
+    .ex-number {
+      font-weight: 800;
+      color: var(--primary-dark);
+      margin-right: 0.3rem;
+      font-size: 1.02rem;
+    }
+
+    .workspace-area {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 0.45rem;
+      background: #f1f5fb;
+      padding: 0.7rem 0.85rem;
+      border-radius: 10px;
+      border: 1px solid #e1e8f4;
+    }
+
+    .step-badge {
+      font-size: 0.78rem;
+      font-weight: 700;
+      color: var(--accent);
+      background: #e6f7f5;
+      padding: 0.18rem 0.5rem;
+      border-radius: 6px;
+      margin-right: 0.2rem;
+    }
+
+    .final-tag {
+      font-size: 0.78rem;
+      font-weight: 700;
+      color: var(--primary-dark);
+      background: #dbeafe;
+      padding: 0.18rem 0.5rem;
+      border-radius: 6px;
+    }
+
+    .feedback-badge {
+      font-size: 0.85rem;
+      font-weight: 700;
+      padding: 0.28rem 0.65rem;
+      border-radius: 6px;
+    }
+
+    .feedback-badge.ok {
+      background: var(--success-bg);
+      color: var(--success);
+    }
+
+    .feedback-badge.err {
+      background: var(--error-bg);
+      color: var(--error);
+    }
+
+    .solution-text {
+      font-size: 0.92rem;
+      color: var(--text);
+      background: var(--surface-alt);
+      padding: 0.65rem 0.85rem;
+      border-radius: 8px;
+      border-left: 3px solid var(--accent);
+      display: none;
+    }
+
+    .solution-text.visible {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 0.35rem;
+    }
+
+    .helper-note {
+      font-size: 0.88rem;
+      color: var(--muted);
+      margin-bottom: 0.95rem;
+      background: #f8fafc;
+      padding: 0.6rem 0.85rem;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+    }
+  </style>
+</head>
+<body>
+  <header class="hero">
+    <h1>Clase Magistral: Operaciones Fundamentales con Fracciones</h1>
+    <p>Aprende paso a paso la suma, resta, multiplicación y división de fracciones, y completa directamente el procedimiento y resultado en formato de fracción.</p>
+    <div class="progress-bar-container" aria-label="Progreso de ejercicios resueltos">
+      <div class="progress-bar-fill" id="progressBar"></div>
+    </div>
+    <div class="progress-label" id="progressLabel">Progreso: 0 / 40 ejercicios correctos (0%)</div>
+  </header>
+
+  <nav class="toc">
+    <a href="#introduccion">Introducción</a>
+    <a href="#suma-igual">1.1 Suma (Igual Den.)</a>
+    <a href="#suma-distinto">1.2 Suma (Mariposa)</a>
+    <a href="#resta-igual">2.1 Resta (Igual Den.)</a>
+    <a href="#resta-distinto">2.2 Resta (Mariposa)</a>
+    <a href="#multiplicacion">3. Multiplicación</a>
+    <a href="#division">4. División</a>
+  </nav>
+
+  <main class="container">
+    <!-- INTRODUCCIÓN -->
+    <section class="card" id="introduccion">
+      <h2 class="module-title">Introducción</h2>
+      <p>Una <strong>fracción</strong> representa la división de una totalidad en partes iguales. Se compone de dos elementos fundamentales:</p>
+      <ul>
+        <li><strong>Numerador:</strong> Indica la cantidad de partes que se toman o consideran del total (va en la parte superior).</li>
+        <li><strong>Denominador:</strong> Indica el número total de partes iguales en las que se ha dividido la unidad (va en la parte inferior).</li>
+      </ul>
+      <p>En la representación <span class="frac"><span class="num">a</span><span class="den">b</span></span>, <strong>a</strong> es el numerador y <strong>b</strong> es el denominador (nunca puede ser cero).</p>
+      <h3 class="sub-title">Importancia de la Simplificación</h3>
+      <p>Simplificar una fracción consiste en dividir tanto el numerador como el denominador por un mismo número entero mayor que 1 hasta que ya no tengan divisores comunes mayores que 1. Siempre expresa tu resultado final como <strong>fracción irreducible</strong> (si el resultado es entero, por ejemplo 2, puedes escribir 2 en el numerador y 1 en el denominador).</p>
+    </section>
+
+    <!-- MÓDULO 1: SUMA -->
+    <section class="card" id="modulo-suma">
+      <h2 class="module-title">Módulo 1: Suma de Fracciones</h2>
+
+      <div id="suma-igual">
+        <h3 class="sub-title">1.1. Suma de fracciones con igual denominador (homogéneas)</h3>
+        <h4 class="mini-title">Procedimiento paso a paso:</h4>
+        <ol>
+          <li><strong>Verificar:</strong> Confirmar que todas las fracciones compartan exactamente el mismo denominador.</li>
+          <li><strong>Sumar numeradores:</strong> Sumar los valores de los numeradores directamente.</li>
+          <li><strong>Conservar denominador:</strong> Mantener el mismo denominador común sin modificarlo.</li>
+          <li><strong>Simplificar:</strong> Reducir la fracción resultante a su mínima expresión si es posible.</li>
+        </ol>
+
+        <div class="example-box">
+          <strong class="label">Ejemplos resueltos:</strong>
+          <p><strong>Con 2 fracciones:</strong><br/>
+            <span class="math-line">
+              <span class="frac"><span class="num">2</span><span class="den">7</span></span> +
+              <span class="frac"><span class="num">3</span><span class="den">7</span></span> =
+              <span class="frac"><span class="num">2 + 3</span><span class="den">7</span></span> =
+              <span class="frac"><span class="num">5</span><span class="den">7</span></span>
+            </span>
+          </p>
+          <p><strong>Con 3 fracciones:</strong><br/>
+            <span class="math-line">
+              <span class="frac"><span class="num">1</span><span class="den">8</span></span> +
+              <span class="frac"><span class="num">3</span><span class="den">8</span></span> +
+              <span class="frac"><span class="num">2</span><span class="den">8</span></span> =
+              <span class="frac"><span class="num">1 + 3 + 2</span><span class="den">8</span></span> =
+              <span class="frac"><span class="num">6</span><span class="den">8</span></span> → Simplificando entre 2 =
+              <span class="frac"><span class="num">3</span><span class="den">4</span></span>
+            </span>
+          </p>
+        </div>
+
+        <div class="exercises-block" id="block-suma-igual"></div>
+      </div>
+
+      <div id="suma-distinto">
+        <h3 class="sub-title">1.2. Suma de fracciones con diferente denominador (heterogéneas) — Método Cruzado o de la Mariposa</h3>
+        <h4 class="mini-title">Procedimiento paso a paso para 2 fracciones:</h4>
+        <ol>
+          <li><strong>Paso 1 (Ala izquierda):</strong> Multiplicar el numerador de la primera fracción por el denominador de la segunda.</li>
+          <li><strong>Paso 2 (Ala derecha):</strong> Multiplicar el denominador de la primera fracción por el numerador de la segunda.</li>
+          <li><strong>Paso 3 (Antenas / Numerador):</strong> Sumar ambos productos cruzados para obtener el numerador.</li>
+          <li><strong>Paso 4 (Cuerpo / Denominador):</strong> Multiplicar ambos denominadores entre sí para obtener el denominador común.</li>
+          <li><strong>Paso 5:</strong> Simplificar el resultado final si es posible.</li>
+        </ol>
+
+        <div class="example-box">
+          <strong class="label">Ejemplo resuelto con 2 fracciones:</strong>
+          <p>
+            <span class="math-line">
+              <span class="frac"><span class="num">2</span><span class="den">3</span></span> +
+              <span class="frac"><span class="num">1</span><span class="den">4</span></span> =
+              <span class="frac"><span class="num">(2 × 4) + (3 × 1)</span><span class="den">3 × 4</span></span> =
+              <span class="frac"><span class="num">8 + 3</span><span class="den">12</span></span> =
+              <span class="frac"><span class="num">11</span><span class="den">12</span></span>
+            </span>
+          </p>
+        </div>
+
+        <h4 class="mini-title">Procedimiento paso a paso para 3 fracciones (agrupación sucesiva):</h4>
+        <ol>
+          <li><strong>Paso 1:</strong> Resolver la suma de las dos primeras fracciones aplicando el método de la mariposa.</li>
+          <li><strong>Paso 2:</strong> Simplificar el resultado parcial si es posible para trabajar con números más pequeños.</li>
+          <li><strong>Paso 3:</strong> Operar el resultado obtenido con la tercera fracción aplicando nuevamente el método de la mariposa.</li>
+          <li><strong>Paso 4:</strong> Simplificar el resultado final.</li>
+        </ol>
+
+        <div class="example-box">
+          <strong class="label">Ejemplo resuelto con 3 fracciones:</strong>
+          <p><strong>Paso 1 (primeras dos fracciones):</strong><br/>
+            <span class="math-line">
+              <span class="frac"><span class="num">1</span><span class="den">2</span></span> +
+              <span class="frac"><span class="num">1</span><span class="den">3</span></span> =
+              <span class="frac"><span class="num">(1 × 3) + (2 × 1)</span><span class="den">2 × 3</span></span> =
+              <span class="frac"><span class="num">3 + 2</span><span class="den">6</span></span> =
+              <span class="frac"><span class="num">5</span><span class="den">6</span></span>
+            </span>
+          </p>
+          <p><strong>Paso 2 (resultado con la tercera fracción):</strong><br/>
+            <span class="math-line">
+              <span class="frac"><span class="num">5</span><span class="den">6</span></span> +
+              <span class="frac"><span class="num">1</span><span class="den">5</span></span> =
+              <span class="frac"><span class="num">(5 × 5) + (6 × 1)</span><span class="den">6 × 5</span></span> =
+              <span class="frac"><span class="num">25 + 6</span><span class="den">30</span></span> =
+              <span class="frac"><span class="num">31</span><span class="den">30</span></span>
+            </span>
+          </p>
+        </div>
+
+        <div class="exercises-block" id="block-suma-distinto"></div>
+      </div>
+    </section>
+
+    <!-- MÓDULO 2: RESTA -->
+    <section class="card" id="modulo-resta">
+      <h2 class="module-title">Módulo 2: Resta de Fracciones</h2>
+
+      <div id="resta-igual">
+        <h3 class="sub-title">2.1. Resta de fracciones con igual denominador (homogéneas)</h3>
+        <h4 class="mini-title">Procedimiento paso a paso:</h4>
+        <ol>
+          <li><strong>Confirmar:</strong> Comprobar que los denominadores sean iguales.</li>
+          <li><strong>Restar numeradores:</strong> Restar los numeradores en orden de izquierda a derecha.</li>
+          <li><strong>Mantener denominador:</strong> Conservar el denominador común.</li>
+          <li><strong>Simplificar:</strong> Reducir la fracción resultante a su mínima expresión.</li>
+        </ol>
+
+        <div class="example-box">
+          <strong class="label">Ejemplos resueltos:</strong>
+          <p><strong>Con 2 fracciones:</strong><br/>
+            <span class="math-line">
+              <span class="frac"><span class="num">7</span><span class="den">9</span></span> -
+              <span class="frac"><span class="num">4</span><span class="den">9</span></span> =
+              <span class="frac"><span class="num">7 - 4</span><span class="den">9</span></span> =
+              <span class="frac"><span class="num">3</span><span class="den">9</span></span> → Simplificando entre 3 =
+              <span class="frac"><span class="num">1</span><span class="den">3</span></span>
+            </span>
+          </p>
+          <p><strong>Con 3 fracciones:</strong><br/>
+            <span class="math-line">
+              <span class="frac"><span class="num">11</span><span class="den">12</span></span> -
+              <span class="frac"><span class="num">3</span><span class="den">12</span></span> -
+              <span class="frac"><span class="num">2</span><span class="den">12</span></span> =
+              <span class="frac"><span class="num">11 - 3 - 2</span><span class="den">12</span></span> =
+              <span class="frac"><span class="num">6</span><span class="den">12</span></span> → Simplificando entre 6 =
+              <span class="frac"><span class="num">1</span><span class="den">2</span></span>
+            </span>
+          </p>
+        </div>
+
+        <div class="exercises-block" id="block-resta-igual"></div>
+      </div>
+
+      <div id="resta-distinto">
+        <h3 class="sub-title">2.2. Resta de fracciones con diferente denominador (heterogéneas) — Método Cruzado o de la Mariposa</h3>
+        <h4 class="mini-title">Procedimiento paso a paso para 2 fracciones:</h4>
+        <ol>
+          <li><strong>Paso 1 (Ala izquierda):</strong> Multiplicar el numerador de la primera fracción por el denominador de la segunda (respetando el orden).</li>
+          <li><strong>Paso 2 (Ala derecha):</strong> Multiplicar el denominador de la primera fracción por el numerador de la segunda.</li>
+          <li><strong>Paso 3 (Antenas / Numerador):</strong> Restar al primer producto el segundo producto.</li>
+          <li><strong>Paso 4 (Cuerpo / Denominador):</strong> Multiplicar ambos denominadores entre sí.</li>
+          <li><strong>Paso 5:</strong> Simplificar el resultado si es posible.</li>
+        </ol>
+
+        <div class="example-box">
+          <strong class="label">Ejemplo resuelto con 2 fracciones:</strong>
+          <p>
+            <span class="math-line">
+              <span class="frac"><span class="num">4</span><span class="den">5</span></span> -
+              <span class="frac"><span class="num">1</span><span class="den">3</span></span> =
+              <span class="frac"><span class="num">(4 × 3) - (5 × 1)</span><span class="den">5 × 3</span></span> =
+              <span class="frac"><span class="num">12 - 5</span><span class="den">15</span></span> =
+              <span class="frac"><span class="num">7</span><span class="den">15</span></span>
+            </span>
+          </p>
+        </div>
+
+        <h4 class="mini-title">Procedimiento paso a paso para 3 fracciones (mariposa sucesiva):</h4>
+        <ol>
+          <li><strong>Paso 1:</strong> Resolver la resta de las dos primeras fracciones con el método de la mariposa.</li>
+          <li><strong>Paso 2:</strong> Simplificar el resultado parcial si conviene.</li>
+          <li><strong>Paso 3:</strong> Restar la tercera fracción al resultado anterior aplicando otra vez la mariposa.</li>
+          <li><strong>Paso 4:</strong> Simplificar el resultado definitivo.</li>
+        </ol>
+
+        <div class="example-box">
+          <strong class="label">Ejemplo resuelto con 3 fracciones:</strong>
+          <p><strong>Paso 1 (primeras dos fracciones):</strong><br/>
+            <span class="math-line">
+              <span class="frac"><span class="num">5</span><span class="den">6</span></span> -
+              <span class="frac"><span class="num">1</span><span class="den">4</span></span> =
+              <span class="frac"><span class="num">(5 × 4) - (6 × 1)</span><span class="den">6 × 4</span></span> =
+              <span class="frac"><span class="num">20 - 6</span><span class="den">24</span></span> =
+              <span class="frac"><span class="num">14</span><span class="den">24</span></span> → Simplificando entre 2 =
+              <span class="frac"><span class="num">7</span><span class="den">12</span></span>
+            </span>
+          </p>
+          <p><strong>Paso 2 (resultado con la tercera fracción):</strong><br/>
+            <span class="math-line">
+              <span class="frac"><span class="num">7</span><span class="den">12</span></span> -
+              <span class="frac"><span class="num">1</span><span class="den">3</span></span> =
+              <span class="frac"><span class="num">(7 × 3) - (12 × 1)</span><span class="den">12 × 3</span></span> =
+              <span class="frac"><span class="num">21 - 12</span><span class="den">36</span></span> =
+              <span class="frac"><span class="num">9</span><span class="den">36</span></span> → Simplificando entre 9 =
+              <span class="frac"><span class="num">1</span><span class="den">4</span></span>
+            </span>
+          </p>
+        </div>
+
+        <div class="exercises-block" id="block-resta-distinto"></div>
+      </div>
+    </section>
+
+    <!-- MÓDULO 3: MULTIPLICACIÓN -->
+    <section class="card" id="multiplicacion">
+      <h2 class="module-title">Módulo 3: Multiplicación de Fracciones</h2>
+      <h4 class="mini-title">Procedimiento paso a paso (multiplicación lineal o directa):</h4>
+      <ol>
+        <li><strong>Paso 1:</strong> Multiplicar todos los numeradores entre sí en línea recta para obtener el nuevo numerador.</li>
+        <li><strong>Paso 2:</strong> Multiplicar todos los denominadores entre sí en línea recta para obtener el nuevo denominador.</li>
+        <li><strong>Paso 3:</strong> Simplificar la fracción resultante hasta su mínima expresión (puedes simplificar factores comunes antes o después de multiplicar).</li>
+      </ol>
+
+      <div class="example-box">
+        <strong class="label">Ejemplos resueltos:</strong>
+        <p><strong>Con 2 fracciones:</strong><br/>
+          <span class="math-line">
+            <span class="frac"><span class="num">3</span><span class="den">4</span></span> ×
+            <span class="frac"><span class="num">2</span><span class="den">5</span></span> =
+            <span class="frac"><span class="num">3 × 2</span><span class="den">4 × 5</span></span> =
+            <span class="frac"><span class="num">6</span><span class="den">20</span></span> → Simplificando entre 2 =
+            <span class="frac"><span class="num">3</span><span class="den">10</span></span>
+          </span>
+        </p>
+        <p><strong>Con 3 fracciones:</strong><br/>
+          <span class="math-line">
+            <span class="frac"><span class="num">2</span><span class="den">3</span></span> ×
+            <span class="frac"><span class="num">4</span><span class="den">5</span></span> ×
+            <span class="frac"><span class="num">3</span><span class="den">8</span></span> =
+            <span class="frac"><span class="num">2 × 4 × 3</span><span class="den">3 × 5 × 8</span></span> =
+            <span class="frac"><span class="num">24</span><span class="den">120</span></span> → Simplificando entre 24 =
+            <span class="frac"><span class="num">1</span><span class="den">5</span></span>
+          </span>
+        </p>
+      </div>
+
+      <div class="exercises-block" id="block-multiplicacion"></div>
+    </section>
+
+    <!-- MÓDULO 4: DIVISIÓN -->
+    <section class="card" id="division">
+      <h2 class="module-title">Módulo 4: División de Fracciones</h2>
+
+      <h3 class="sub-title">Enfoque A: Producto Cruzado / Zig-Zag (para 2 fracciones)</h3>
+      <ol>
+        <li><strong>Paso 1:</strong> Multiplicar el numerador de la primera fracción por el denominador de la segunda y colocar el resultado en el numerador.</li>
+        <li><strong>Paso 2:</strong> Multiplicar el denominador de la primera fracción por el numerador de la segunda y colocar el resultado en el denominador.</li>
+        <li><strong>Paso 3:</strong> Simplificar el resultado.</li>
+      </ol>
+
+      <h3 class="sub-title">Enfoque B: Inverso Multiplicativo / Invertir y Multiplicar (ideal para 2 o 3 fracciones)</h3>
+      <ol>
+        <li><strong>Paso 1:</strong> Mantener intacta la primera fracción.</li>
+        <li><strong>Paso 2:</strong> Cambiar el signo de división (÷) por multiplicación (×) e invertir la fracción siguiente.</li>
+        <li><strong>Paso 3:</strong> Multiplicar en línea recta y simplificar.</li>
+      </ol>
+
+      <div class="example-box">
+        <strong class="label">Ejemplos resueltos:</strong>
+        <p><strong>Con 2 fracciones:</strong><br/>
+          <span class="math-line">
+            <span class="frac"><span class="num">3</span><span class="den">5</span></span> ÷
+            <span class="frac"><span class="num">2</span><span class="den">7</span></span> =
+            <span class="frac"><span class="num">3 × 7</span><span class="den">5 × 2</span></span> =
+            <span class="frac"><span class="num">21</span><span class="den">10</span></span>
+            <span>(o</span>
+            <span class="frac"><span class="num">3</span><span class="den">5</span></span> ×
+            <span class="frac"><span class="num">7</span><span class="den">2</span></span> =
+            <span class="frac"><span class="num">21</span><span class="den">10</span></span><span>)</span>
+          </span>
+        </p>
+        <p><strong>Con 3 fracciones (de izquierda a derecha):</strong></p>
+        <p><strong>Paso 1:</strong><br/>
+          <span class="math-line">
+            <span class="frac"><span class="num">4</span><span class="den">5</span></span> ÷
+            <span class="frac"><span class="num">2</span><span class="den">3</span></span> =
+            <span class="frac"><span class="num">4 × 3</span><span class="den">5 × 2</span></span> =
+            <span class="frac"><span class="num">12</span><span class="den">10</span></span> → Simplificando entre 2 =
+            <span class="frac"><span class="num">6</span><span class="den">5</span></span>
+          </span>
+        </p>
+        <p><strong>Paso 2:</strong><br/>
+          <span class="math-line">
+            <span class="frac"><span class="num">6</span><span class="den">5</span></span> ÷
+            <span class="frac"><span class="num">1</span><span class="den">2</span></span> =
+            <span class="frac"><span class="num">6 × 2</span><span class="den">5 × 1</span></span> =
+            <span class="frac"><span class="num">12</span><span class="den">5</span></span>
+          </span>
+        </p>
+      </div>
+
+      <div class="exercises-block" id="block-division"></div>
+    </section>
+  </main>
+
+  <script>
+    function gcd(a, b) {
+      a = Math.abs(a);
+      b = Math.abs(b);
+      while (b !== 0) {
+        const t = b;
+        b = a % b;
+        a = t;
+      }
+      return a || 1;
+    }
+
+    function f(n, d) {
+      return `<span class="frac"><span class="num">${n}</span><span class="den">${d}</span></span>`;
+    }
+
+    function fracBox(idPrefix, stepName, widthClass = "") {
+      return `
+        <span class="frac-box">
+          <input type="text" class="step-input ${widthClass}" id="${idPrefix}-${stepName}-n" placeholder="num" aria-label="Numerador ${stepName}" />
+          <span class="frac-line-bar"></span>
+          <input type="text" class="step-input ${widthClass}" id="${idPrefix}-${stepName}-d" placeholder="den" aria-label="Denominador ${stepName}" />
+        </span>
+      `;
+    }
+
+    function finalFracBox(idPrefix) {
+      return `
+        <span class="frac-box" style="border-color:#93c5fd; background:#eff6ff;">
+          <input type="text" class="final-input" id="${idPrefix}-final-n" placeholder="num" aria-label="Numerador final" />
+          <span class="frac-line-bar" style="background:#1d4ed8;"></span>
+          <input type="text" class="final-input" id="${idPrefix}-final-d" placeholder="den" aria-label="Denominador final" />
+        </span>
+      `;
+    }
+
+    function normMathExpr(str) {
+      return str
+        .replace(/\s+/g, "")
+        .replace(/\*/g, "×")
+        .replace(/x/gi, "×")
+        .replace(/−/g, "-");
+    }
+
+    // Evalúa de forma segura una expresión aritmética simple con +, -, ×
+    function evalSimpleExpr(str) {
+      if (!str) return null;
+      const cleaned = str.trim().replace(/×/g, "*").replace(/x/gi, "*").replace(/−/g, "-");
+      if (!/^[0-9+\-*()\s]+$/.test(cleaned)) return null;
+      try {
+        const val = Function(`"use strict"; return (${cleaned});`)();
+        return typeof val === "number" && Number.isFinite(val) ? val : null;
+      } catch (e) {
+        return null;
+      }
+    }
+
+    function isSameFractionPair(unStr, udStr, targetNum, targetDen) {
+      const n = parseInt((unStr || "").trim(), 10);
+      const d = parseInt((udStr || "").trim(), 10);
+      if (Number.isNaN(n) || Number.isNaN(d) || d === 0) return false;
+      const g1 = gcd(n, d);
+      let un = n / g1;
+      let ud = d / g1;
+      if (ud < 0) { un = -un; ud = -ud; }
+
+      const g2 = gcd(targetNum, targetDen);
+      let tn = targetNum / g2;
+      let td = targetDen / g2;
+      if (td < 0) { tn = -tn; td = -td; }
+
+      return un === tn && ud === td;
+    }
+
+    const SECTIONS = [
+      {
+        id: "block-suma-igual",
+        title: "Ejercicios de Suma con Igual Denominador (5 ejercicios)",
+        items: [
+          {
+            id: "si-1",
+            promptHtml: `${f(3,8)} + ${f(2,8)}`,
+            stepsHtml: (id) => `
+              ${fracBox(id, "p1", "med")}
+              <span>=</span>
+              <span class="final-tag">Resultado:</span>
+              ${finalFracBox(id)}
+            `,
+            checks: [
+              { step: "p1", nEval: 5, dVal: 8 }
+            ],
+            ans: [5, 8],
+            solHtml: `${f("3 + 2", 8)} = ${f(5, 8)}`
+          },
+          {
+            id: "si-2",
+            promptHtml: `${f(4,11)} + ${f(5,11)} + ${f(1,11)}`,
+            stepsHtml: (id) => `
+              ${fracBox(id, "p1", "wide")}
+              <span>=</span>
+              <span class="final-tag">Resultado:</span>
+              ${finalFracBox(id)}
+            `,
+            checks: [
+              { step: "p1", nEval: 10, dVal: 11 }
+            ],
+            ans: [10, 11],
+            solHtml: `${f("4 + 5 + 1", 11)} = ${f(10, 11)}`
+          },
+          {
+            id: "si-3",
+            promptHtml: `${f(2,9)} + ${f(4,9)}`,
+            stepsHtml: (id) => `
+              ${fracBox(id, "p1", "med")}
+              <span>=</span>
+              ${fracBox(id, "p2")}
+              <span>→ Simplificado:</span>
+              ${finalFracBox(id)}
+            `,
+            checks: [
+              { step: "p1", nEval: 6, dVal: 9 },
+              { step: "p2", nVal: 6, dVal: 9 }
+            ],
+            ans: [2, 3],
+            solHtml: `${f("2 + 4", 9)} = ${f(6, 9)} → simplificando entre 3 = ${f(2, 3)}`
+          },
+          {
+            id: "si-4",
+            promptHtml: `${f(1,6)} + ${f(2,6)} + ${f(2,6)}`,
+            stepsHtml: (id) => `
+              ${fracBox(id, "p1", "wide")}
+              <span>=</span>
+              <span class="final-tag">Resultado:</span>
+              ${finalFracBox(id)}
+            `,
+            checks: [
+              { step: "p1", nEval: 5, dVal: 6 }
+            ],
+            ans: [5, 6],
+            solHtml: `${f("1 + 2 + 2", 6)} = ${f(5, 6)}`
+          },
+          {
+            id: "si-5",
+            promptHtml: `${f(5,12)} + ${f(3,12)} + ${f(1,12)}`,
+            stepsHtml: (id) => `
+              ${fracBox(id, "p1", "wide")}
+              <span>=</span>
+              ${fracBox(id, "p2")}
+              <span>→ Simplificado:</span>
+              ${finalFracBox(id)}
+            `,
+            checks: [
+              { step: "p1", nEval: 9, dVal: 12 },
+              { step: "p2", nVal: 9, dVal: 12 }
+            ],
+            ans: [3, 4],
+            solHtml: `${f("5 + 3 + 1", 12)} = ${f(9, 12)} → simplificando entre 3 = ${f(3, 4)}`
+          }
+        ]
+      },
+      {
+        id: "block-suma-distinto",
+        title: "Ejercicios de Suma con Diferente Denominador — Método Mariposa (8 ejercicios)",
+        items: [
+          {
+            id: "sd-1",
+            promptHtml: `${f(1,3)} + ${f(2,5)}`,
+            stepsHtml: (id) => `
+              <span class="step-badge">Mariposa:</span>
+              ${fracBox(id, "p1", "wide")}
+              <span>=</span>
+              ${fracBox(id, "p2", "med")}
+              <span>=</span>
+              <span class="final-tag">Resultado:</span>
+              ${finalFracBox(id)}
+            `,
+            checks: [
+              { step: "p1", nEval: 11, dEval: 15 },
+              { step: "p2", nEval: 11, dVal: 15 }
+            ],
+            ans: [11, 15],
+            solHtml: `${f("(1 × 5) + (3 × 2)", "3 × 5")} = ${f("5 + 6", 15)} = ${f(11, 15)}`
+          },
+          {
+            id: "sd-2",
+            promptHtml: `${f(3,4)} + ${f(1,6)}`,
+            stepsHtml: (id) => `
+              <span class="step-badge">Mariposa:</span>
+              ${fracBox(id, "p1", "wide")}
+              <span>=</span>
+              ${fracBox(id, "p2", "med")}
+              <span>=</span>
+              ${fracBox(id, "p3")}
+              <span>→ Simplificado:</span>
+              ${finalFracBox(id)}
+            `,
+            checks: [
+              { step: "p1", nEval: 22, dEval: 24 },
+              { step: "p2", nEval: 22, dVal: 24 },
+              { step: "p3", nVal: 22, dVal: 24 }
+            ],
+            ans: [11, 12],
+            solHtml: `${f("(3 × 6) + (4 × 1)", "4 × 6")} = ${f("18 + 4", 24)} = ${f(22, 24)} → ${f(11, 12)}`
+          },
+          {
+            id: "sd-3",
+            promptHtml: `${f(2,7)} + ${f(3,4)}`,
+            stepsHtml: (id) => `
+              <span class="step-badge">Mariposa:</span>
+              ${fracBox(id, "p1", "wide")}
+              <span>=</span>
+              ${fracBox(id, "p2", "med")}
+              <span>=</span>
+              <span class="final-tag">Resultado:</span>
+              ${finalFracBox(id)}
+            `,
+            checks: [
+              { step: "p1", nEval: 29, dEval: 28 },
+              { step: "p2", nEval: 29, dVal: 28 }
+            ],
+            ans: [29, 28],
+            solHtml: `${f("(2 × 4) + (7 × 3)", "7 × 4")} = ${f("8 + 21", 28)} = ${f(29, 28)}`
+          },
+          {
+            id: "sd-4",
+            promptHtml: `${f(5,9)} + ${f(1,2)}`,
+            stepsHtml: (id) => `
+              <span class="step-badge">Mariposa:</span>
+              ${fracBox(id, "p1", "wide")}
+              <span>=</span>
+              ${fracBox(id, "p2", "med")}
+              <span>=</span>
+              <span class="final-tag">Resultado:</span>
+              ${finalFracBox(id)}
+            `,
+            checks: [
+              { step: "p1", nEval: 19, dEval: 18 },
+              { step: "p2", nEval: 19, dVal: 18 }
+            ],
+            ans: [19, 18],
+            solHtml: `${f("(5 × 2) + (9 × 1)", "9 × 2")} = ${f("10 + 9", 18)} = ${f(19, 18)}`
+          },
+          {
+            id: "sd-5",
+            promptHtml: `${f(1,2)} + ${f(1,4)} + ${f(1,3)}`,
+            stepsHtml: (id) => `
+              <span class="step-badge">1ª pareja:</span>
+              ${fracBox(id, "p1", "wide")}
+              <span>=</span>
+              ${fracBox(id, "p2")}
+              <span class="step-badge">2ª pareja (+ ${f(1,3)}):</span>
+              ${fracBox(id, "p3", "wide")}
+              <span>=</span>
+              <span class="final-tag">Resultado:</span>
+              ${finalFracBox(id)}
+            `,
+            checks: [
+              { step: "p1", nEval: 6, dEval: 8 },
+              { step: "p2", equiv: [3, 4] },
+              { step: "p3", equiv: [13, 12] }
+            ],
+            ans: [13, 12],
+            solHtml: `1ª pareja: ${f("(1×4)+(2×1)", "2×4")} = ${f(6,8)} = ${f(3,4)}; luego ${f(3,4)} + ${f(1,3)} = ${f("(3×3)+(4×1)", "4×3")} = ${f(13,12)}`
+          },
+          {
+            id: "sd-6",
+            promptHtml: `${f(2,5)} + ${f(1,3)} + ${f(1,2)}`,
+            stepsHtml: (id) => `
+              <span class="step-badge">1ª pareja:</span>
+              ${fracBox(id, "p1", "wide")}
+              <span>=</span>
+              ${fracBox(id, "p2")}
+              <span class="step-badge">2ª pareja (+ ${f(1,2)}):</span>
+              ${fracBox(id, "p3", "wide")}
+              <span>=</span>
+              <span class="final-tag">Resultado:</span>
+              ${finalFracBox(id)}
+            `,
+            checks: [
+              { step: "p1", nEval: 11, dEval: 15 },
+              { step: "p2", equiv: [11, 15] },
+              { step: "p3", equiv: [37, 30] }
+            ],
+            ans: [37, 30],
+            solHtml: `1ª pareja: ${f("(2×3)+(5×1)", "5×3")} = ${f(11,15)}; luego ${f(11,15)} + ${f(1,2)} = ${f("(11×2)+(15×1)", "15×2")} = ${f(37,30)}`
+          },
+          {
+            id: "sd-7",
+            promptHtml: `${f(3,8)} + ${f(1,4)} + ${f(2,5)}`,
+            stepsHtml: (id) => `
+              <span class="step-badge">1ª pareja:</span>
+              ${fracBox(id, "p1", "wide")}
+              <span>=</span>
+              ${fracBox(id, "p2")}
+              <span class="step-badge">2ª pareja (+ ${f(2,5)}):</span>
+              ${fracBox(id, "p3", "wide")}
+              <span>=</span>
+              <span class="final-tag">Resultado:</span>
+              ${finalFracBox(id)}
+            `,
+            checks: [
+              { step: "p1", nEval: 20, dEval: 32 },
+              { step: "p2", equiv: [5, 8] },
+              { step: "p3", equiv: [41, 40] }
+            ],
+            ans: [41, 40],
+            solHtml: `1ª pareja: ${f("(3×4)+(8×1)", "8×4")} = ${f(20,32)} = ${f(5,8)}; luego ${f(5,8)} + ${f(2,5)} = ${f("(5×5)+(8×2)", "8×5")} = ${f(41,40)}`
+          },
+          {
+            id: "sd-8",
+            promptHtml: `${f(1,6)} + ${f(2,3)} + ${f(3,4)}`,
+            stepsHtml: (id) => `
+              <span class="step-badge">1ª pareja:</span>
+              ${fracBox(id, "p1", "wide")}
+              <span>=</span>
+              ${fracBox(id, "p2")}
+              <span class="step-badge">2ª pareja (+ ${f(3,4)}):</span>
+              ${fracBox(id, "p3", "wide")}
+              <span>=</span>
+              <span class="final-tag">Resultado:</span>
+              ${finalFracBox(id)}
+            `,
+            checks: [
+              { step: "p1", nEval: 15, dEval: 18 },
+              { step: "p2", equiv: [5, 6] },
+              { step: "p3", equiv: [19, 12] }
+            ],
+            ans: [19, 12],
+            solHtml: `1ª pareja: ${f("(1×3)+(6×2)", "6×3")} = ${f(15,18)} = ${f(5,6)}; luego ${f(5,6)} + ${f(3,4)} = ${f("(5×4)+(6×3)", "6×4")} = ${f(38,24)} = ${f(19,12)}`
+          }
+        ]
+      },
+      {
+        id: "block-resta-igual",
+        title: "Ejercicios de Resta con Igual Denominador (5 ejercicios)",
+        items: [
+          {
+            id: "ri-1",
+            promptHtml: `${f(7,10)} - ${f(3,10)}`,
+            stepsHtml: (id) => `
+              ${fracBox(id, "p1", "med")}
+              <span>=</span>
+              ${fracBox(id, "p2")}
+              <span>→ Simplificado:</span>
+              ${finalFracBox(id)}
+            `,
+            checks: [
+              { step: "p1", nEval: 4, dVal: 10 },
+              { step: "p2", nVal: 4, dVal: 10 }
+            ],
+            ans: [2, 5],
+            solHtml: `${f("7 - 3", 10)} = ${f(4, 10)} → simplificando entre 2 = ${f(2, 5)}`
+          },
+          {
+            id: "ri-2",
+            promptHtml: `${f(14,15)} - ${f(4,15)} - ${f(2,15)}`,
+            stepsHtml: (id) => `
+              ${fracBox(id, "p1", "wide")}
+              <span>=</span>
+              <span class="final-tag">Resultado:</span>
+              ${finalFracBox(id)}
+            `,
+            checks: [
+              { step: "p1", nEval: 8, dVal: 15 }
+            ],
+            ans: [8, 15],
+            solHtml: `${f("14 - 4 - 2", 15)} = ${f(8, 15)}`
+          },
+          {
+            id: "ri-3",
+            promptHtml: `${f(8,9)} - ${f(2,9)}`,
+            stepsHtml: (id) => `
+              ${fracBox(id, "p1", "med")}
+              <span>=</span>
+              ${fracBox(id, "p2")}
+              <span>→ Simplificado:</span>
+              ${finalFracBox(id)}
+            `,
+            checks: [
+              { step: "p1", nEval: 6, dVal: 9 },
+              { step: "p2", nVal: 6, dVal: 9 }
+            ],
+            ans: [2, 3],
+            solHtml: `${f("8 - 2", 9)} = ${f(6, 9)} → simplificando entre 3 = ${f(2, 3)}`
+          },
+          {
+            id: "ri-4",
+            promptHtml: `${f(9,11)} - ${f(3,11)} - ${f(2,11)}`,
+            stepsHtml: (id) => `
+              ${fracBox(id, "p1", "wide")}
+              <span>=</span>
+              <span class="final-tag">Resultado:</span>
+              ${finalFracBox(id)}
+            `,
+            checks: [
+              { step: "p1", nEval: 4, dVal: 11 }
+            ],
+            ans: [4, 11],
+            solHtml: `${f("9 - 3 - 2", 11)} = ${f(4, 11)}`
+          },
+          {
+            id: "ri-5",
+            promptHtml: `${f(13,16)} - ${f(5,16)} - ${f(2,16)}`,
+            stepsHtml: (id) => `
+              ${fracBox(id, "p1", "wide")}
+              <span>=</span>
+              ${fracBox(id, "p2")}
+              <span>→ Simplificado:</span>
+              ${finalFracBox(id)}
+            `,
+            checks: [
+              { step: "p1", nEval: 6, dVal: 16 },
+              { step: "p2", nVal: 6, dVal: 16 }
+            ],
+            ans: [3, 8],
+            solHtml: `${f("13 - 5 - 2", 16)} = ${f(6, 16)} → simplificando entre 2 = ${f(3, 8)}`
+          }
+        ]
+      },
+      {
+        id: "block-resta-distinto",
+        title: "Ejercicios de Resta con Diferente Denominador — Método Mariposa (8 ejercicios)",
+        items: [
+          {
+            id: "rd-1",
+            promptHtml: `${f(3,4)} - ${f(1,3)}`,
+            stepsHtml: (id) => `
+              <span class="step-badge">Mariposa:</span>
+              ${fracBox(id, "p1", "wide")}
+              <span>=</span>
+              ${fracBox(id, "p2", "med")}
+              <span>=</span>
+              <span class="final-tag">Resultado:</span>
+              ${finalFracBox(id)}
+            `,
+            checks: [
+              { step: "p1", nEval: 5, dEval: 12 },
+              { step: "p2", nEval: 5, dVal: 12 }
+            ],
+            ans: [5, 12],
+            solHtml: `${f("(3 × 3) - (4 × 1)", "4 × 3")} = ${f("9 - 4", 12)} = ${f(5, 12)}`
+          },
+          {
+            id: "rd-2",
+            promptHtml: `${f(5,6)} - ${f(2,5)}`,
+            stepsHtml: (id) => `
+              <span class="step-badge">Mariposa:</span>
+              ${fracBox(id, "p1", "wide")}
+              <span>=</span>
+              ${fracBox(id, "p2", "med")}
+              <span>=</span>
+              <span class="final-tag">Resultado:</span>
+              ${finalFracBox(id)}
+            `,
+            checks: [
+              { step: "p1", nEval: 13, dEval: 30 },
+              { step: "p2", nEval: 13, dVal: 30 }
+            ],
+            ans: [13, 30],
+            solHtml: `${f("(5 × 5) - (6 × 2)", "6 × 5")} = ${f("25 - 12", 30)} = ${f(13, 30)}`
+          },
+          {
+            id: "rd-3",
+            promptHtml: `${f(7,8)} - ${f(1,3)}`,
+            stepsHtml: (id) => `
+              <span class="step-badge">Mariposa:</span>
+              ${fracBox(id, "p1", "wide")}
+              <span>=</span>
+              ${fracBox(id, "p2", "med")}
+              <span>=</span>
+              <span class="final-tag">Resultado:</span>
+              ${finalFracBox(id)}
+            `,
+            checks: [
+              { step: "p1", nEval: 13, dEval: 24 },
+              { step: "p2", nEval: 13, dVal: 24 }
+            ],
+            ans: [13, 24],
+            solHtml: `${f("(7 × 3) - (8 × 1)", "8 × 3")} = ${f("21 - 8", 24)} = ${f(13, 24)}`
+          },
+          {
+            id: "rd-4",
+            promptHtml: `${f(4,5)} - ${f(3,7)}`,
+            stepsHtml: (id) => `
+              <span class="step-badge">Mariposa:</span>
+              ${fracBox(id, "p1", "wide")}
+              <span>=</span>
+              ${fracBox(id, "p2", "med")}
+              <span>=</span>
+              <span class="final-tag">Resultado:</span>
+              ${finalFracBox(id)}
+            `,
+            checks: [
+              { step: "p1", nEval: 13, dEval: 35 },
+              { step: "p2", nEval: 13, dVal: 35 }
+            ],
+            ans: [13, 35],
+            solHtml: `${f("(4 × 7) - (5 × 3)", "5 × 7")} = ${f("28 - 15", 35)} = ${f(13, 35)}`
+          },
+          {
+            id: "rd-5",
+            promptHtml: `${f(7,8)} - ${f(1,2)} - ${f(1,4)}`,
+            stepsHtml: (id) => `
+              <span class="step-badge">1ª pareja:</span>
+              ${fracBox(id, "p1", "wide")}
+              <span>=</span>
+              ${fracBox(id, "p2")}
+              <span class="step-badge">2ª pareja (- ${f(1,4)}):</span>
+              ${fracBox(id, "p3", "wide")}
+              <span>=</span>
+              <span class="final-tag">Resultado:</span>
+              ${finalFracBox(id)}
+            `,
+            checks: [
+              { step: "p1", nEval: 6, dEval: 16 },
+              { step: "p2", equiv: [3, 8] },
+              { step: "p3", equiv: [1, 8] }
+            ],
+            ans: [1, 8],
+            solHtml: `1ª pareja: ${f("(7×2)-(8×1)", "8×2")} = ${f(6,16)} = ${f(3,8)}; luego ${f(3,8)} - ${f(1,4)} = ${f("(3×4)-(8×1)", "8×4")} = ${f(4,32)} = ${f(1,8)}`
+          },
+          {
+            id: "rd-6",
+            promptHtml: `${f(5,6)} - ${f(1,3)} - ${f(1,5)}`,
+            stepsHtml: (id) => `
+              <span class="step-badge">1ª pareja:</span>
+              ${fracBox(id, "p1", "wide")}
+              <span>=</span>
+              ${fracBox(id, "p2")}
+              <span class="step-badge">2ª pareja (- ${f(1,5)}):</span>
+              ${fracBox(id, "p3", "wide")}
+              <span>=</span>
+              <span class="final-tag">Resultado:</span>
+              ${finalFracBox(id)}
+            `,
+            checks: [
+              { step: "p1", nEval: 9, dEval: 18 },
+              { step: "p2", equiv: [1, 2] },
+              { step: "p3", equiv: [3, 10] }
+            ],
+            ans: [3, 10],
+            solHtml: `1ª pareja: ${f("(5×3)-(6×1)", "6×3")} = ${f(9,18)} = ${f(1,2)}; luego ${f(1,2)} - ${f(1,5)} = ${f("(1×5)-(2×1)", "2×5")} = ${f(3,10)}`
+          },
+          {
+            id: "rd-7",
+            promptHtml: `${f(9,10)} - ${f(2,5)} - ${f(1,4)}`,
+            stepsHtml: (id) => `
+              <span class="step-badge">1ª pareja:</span>
+              ${fracBox(id, "p1", "wide")}
+              <span>=</span>
+              ${fracBox(id, "p2")}
+              <span class="step-badge">2ª pareja (- ${f(1,4)}):</span>
+              ${fracBox(id, "p3", "wide")}
+              <span>=</span>
+              <span class="final-tag">Resultado:</span>
+              ${finalFracBox(id)}
+            `,
+            checks: [
+              { step: "p1", nEval: 25, dEval: 50 },
+              { step: "p2", equiv: [1, 2] },
+              { step: "p3", equiv: [1, 4] }
+            ],
+            ans: [1, 4],
+            solHtml: `1ª pareja: ${f("(9×5)-(10×2)", "10×5")} = ${f(25,50)} = ${f(1,2)}; luego ${f(1,2)} - ${f(1,4)} = ${f("(1×4)-(2×1)", "2×4")} = ${f(2,8)} = ${f(1,4)}`
+          },
+          {
+            id: "rd-8",
+            promptHtml: `${f(11,12)} - ${f(1,3)} - ${f(1,6)}`,
+            stepsHtml: (id) => `
+              <span class="step-badge">1ª pareja:</span>
+              ${fracBox(id, "p1", "wide")}
+              <span>=</span>
+              ${fracBox(id, "p2")}
+              <span class="step-badge">2ª pareja (- ${f(1,6)}):</span>
+              ${fracBox(id, "p3", "wide")}
+              <span>=</span>
+              <span class="final-tag">Resultado:</span>
+              ${finalFracBox(id)}
+            `,
+            checks: [
+              { step: "p1", nEval: 21, dEval: 36 },
+              { step: "p2", equiv: [7, 12] },
+              { step: "p3", equiv: [5, 12] }
+            ],
+            ans: [5, 12],
+            solHtml: `1ª pareja: ${f("(11×3)-(12×1)", "12×3")} = ${f(21,36)} = ${f(7,12)}; luego ${f(7,12)} - ${f(1,6)} = ${f("(7×6)-(12×1)", "12×6")} = ${f(30,72)} = ${f(5,12)}`
+          }
+        ]
+      },
+      {
+        id: "block-multiplicacion",
+        title: "Ejercicios de Multiplicación de Fracciones (10 ejercicios)",
+        items: [
+          {
+            id: "m-1",
+            promptHtml: `${f(2,3)} × ${f(4,5)}`,
+            stepsHtml: (id) => `
+              ${fracBox(id, "p1", "med")}
+              <span>=</span>
+              <span class="final-tag">Resultado:</span>
+              ${finalFracBox(id)}
+            `,
+            checks: [
+              { step: "p1", nEval: 8, dEval: 15 }
+            ],
+            ans: [8, 15],
+            solHtml: `${f("2 × 4", "3 × 5")} = ${f(8, 15)}`
+          },
+          {
+            id: "m-2",
+            promptHtml: `${f(5,6)} × ${f(3,7)}`,
+            stepsHtml: (id) => `
+              ${fracBox(id, "p1", "med")}
+              <span>=</span>
+              ${fracBox(id, "p2")}
+              <span>→ Simplificado:</span>
+              ${finalFracBox(id)}
+            `,
+            checks: [
+              { step: "p1", nEval: 15, dEval: 42 },
+              { step: "p2", equiv: [5, 14] }
+            ],
+            ans: [5, 14],
+            solHtml: `${f("5 × 3", "6 × 7")} = ${f(15, 42)} → simplificando entre 3 = ${f(5, 14)}`
+          },
+          {
+            id: "m-3",
+            promptHtml: `${f(4,9)} × ${f(3,8)}`,
+            stepsHtml: (id) => `
+              ${fracBox(id, "p1", "med")}
+              <span>=</span>
+              ${fracBox(id, "p2")}
+              <span>→ Simplificado:</span>
+              ${finalFracBox(id)}
+            `,
+            checks: [
+              { step: "p1", nEval: 12, dEval: 72 },
+              { step: "p2", equiv: [1, 6] }
+            ],
+            ans: [1, 6],
+            solHtml: `${f("4 × 3", "9 × 8")} = ${f(12, 72)} → simplificando entre 12 = ${f(1, 6)}`
+          },
+          {
+            id: "m-4",
+            promptHtml: `${f(7,10)} × ${f(5,14)}`,
+            stepsHtml: (id) => `
+              ${fracBox(id, "p1", "med")}
+              <span>=</span>
+              ${fracBox(id, "p2")}
+              <span>→ Simplificado:</span>
+              ${finalFracBox(id)}
+            `,
+            checks: [
+              { step: "p1", nEval: 35, dEval: 140 },
+              { step: "p2", equiv: [1, 4] }
+            ],
+            ans: [1, 4],
+            solHtml: `${f("7 × 5", "10 × 14")} = ${f(35, 140)} → simplificando entre 35 = ${f(1, 4)}`
+          },
+          {
+            id: "m-5",
+            promptHtml: `${f(3,5)} × ${f(10,9)}`,
+            stepsHtml: (id) => `
+              ${fracBox(id, "p1", "med")}
+              <span>=</span>
+              ${fracBox(id, "p2")}
+              <span>→ Simplificado:</span>
+              ${finalFracBox(id)}
+            `,
+            checks: [
+              { step: "p1", nEval: 30, dEval: 45 },
+              { step: "p2", equiv: [2, 3] }
+            ],
+            ans: [2, 3],
+            solHtml: `${f("3 × 10", "5 × 9")} = ${f(30, 45)} → simplificando entre 15 = ${f(2, 3)}`
+          },
+          {
+            id: "m-6",
+            promptHtml: `${f(1,2)} × ${f(2,3)} × ${f(3,4)}`,
+            stepsHtml: (id) => `
+              ${fracBox(id, "p1", "wide")}
+              <span>=</span>
+              ${fracBox(id, "p2")}
+              <span>→ Simplificado:</span>
+              ${finalFracBox(id)}
+            `,
+            checks: [
+              { step: "p1", nEval: 6, dEval: 24 },
+              { step: "p2", equiv: [1, 4] }
+            ],
+            ans: [1, 4],
+            solHtml: `${f("1 × 2 × 3", "2 × 3 × 4")} = ${f(6, 24)} → simplificando entre 6 = ${f(1, 4)}`
+          },
+          {
+            id: "m-7",
+            promptHtml: `${f(2,5)} × ${f(3,4)} × ${f(5,6)}`,
+            stepsHtml: (id) => `
+              ${fracBox(id, "p1", "wide")}
+              <span>=</span>
+              ${fracBox(id, "p2")}
+              <span>→ Simplificado:</span>
+              ${finalFracBox(id)}
+            `,
+            checks: [
+              { step: "p1", nEval: 30, dEval: 120 },
+              { step: "p2", equiv: [1, 4] }
+            ],
+            ans: [1, 4],
+            solHtml: `${f("2 × 3 × 5", "5 × 4 × 6")} = ${f(30, 120)} → simplificando entre 30 = ${f(1, 4)}`
+          },
+          {
+            id: "m-8",
+            promptHtml: `${f(3,7)} × ${f(14,9)} × ${f(1,2)}`,
+            stepsHtml: (id) => `
+              ${fracBox(id, "p1", "wide")}
+              <span>=</span>
+              ${fracBox(id, "p2")}
+              <span>→ Simplificado:</span>
+              ${finalFracBox(id)}
+            `,
+            checks: [
+              { step: "p1", nEval: 42, dEval: 126 },
+              { step: "p2", equiv: [1, 3] }
+            ],
+            ans: [1, 3],
+            solHtml: `${f("3 × 14 × 1", "7 × 9 × 2")} = ${f(42, 126)} → simplificando entre 42 = ${f(1, 3)}`
+          },
+          {
+            id: "m-9",
+            promptHtml: `${f(4,11)} × ${f(22,8)} × ${f(3,5)}`,
+            stepsHtml: (id) => `
+              ${fracBox(id, "p1", "wide")}
+              <span>=</span>
+              ${fracBox(id, "p2")}
+              <span>→ Simplificado:</span>
+              ${finalFracBox(id)}
+            `,
+            checks: [
+              { step: "p1", nEval: 264, dEval: 440 },
+              { step: "p2", equiv: [3, 5] }
+            ],
+            ans: [3, 5],
+            solHtml: `${f("4 × 22 × 3", "11 × 8 × 5")} = ${f(264, 440)} → simplificando entre 88 = ${f(3, 5)}`
+          },
+          {
+            id: "m-10",
+            promptHtml: `${f(5,8)} × ${f(4,15)} × ${f(6,7)}`,
+            stepsHtml: (id) => `
+              ${fracBox(id, "p1", "wide")}
+              <span>=</span>
+              ${fracBox(id, "p2")}
+              <span>→ Simplificado:</span>
+              ${finalFracBox(id)}
+            `,
+            checks: [
+              { step: "p1", nEval: 120, dEval: 840 },
+              { step: "p2", equiv: [1, 7] }
+            ],
+            ans: [1, 7],
+            solHtml: `${f("5 × 4 × 6", "8 × 15 × 7")} = ${f(120, 840)} → simplificando entre 120 = ${f(1, 7)}`
+          }
+        ]
+      },
+      {
+        id: "block-division",
+        title: "Ejercicios de División de Fracciones (10 ejercicios)",
+        items: [
+          {
+            id: "d-1",
+            promptHtml: `${f(3,4)} ÷ ${f(2,5)}`,
+            stepsHtml: (id) => `
+              ${fracBox(id, "p1", "med")}
+              <span>=</span>
+              <span class="final-tag">Resultado:</span>
+              ${finalFracBox(id)}
+            `,
+            checks: [
+              { step: "p1", nEval: 15, dEval: 8 }
+            ],
+            ans: [15, 8],
+            solHtml: `${f("3 × 5", "4 × 2")} = ${f(15, 8)}`
+          },
+          {
+            id: "d-2",
+            promptHtml: `${f(5,8)} ÷ ${f(3,4)}`,
+            stepsHtml: (id) => `
+              ${fracBox(id, "p1", "med")}
+              <span>=</span>
+              ${fracBox(id, "p2")}
+              <span>→ Simplificado:</span>
+              ${finalFracBox(id)}
+            `,
+            checks: [
+              { step: "p1", nEval: 20, dEval: 24 },
+              { step: "p2", equiv: [5, 6] }
+            ],
+            ans: [5, 6],
+            solHtml: `${f("5 × 4", "8 × 3")} = ${f(20, 24)} → simplificando entre 4 = ${f(5, 6)}`
+          },
+          {
+            id: "d-3",
+            promptHtml: `${f(7,9)} ÷ ${f(14,3)}`,
+            stepsHtml: (id) => `
+              ${fracBox(id, "p1", "med")}
+              <span>=</span>
+              ${fracBox(id, "p2")}
+              <span>→ Simplificado:</span>
+              ${finalFracBox(id)}
+            `,
+            checks: [
+              { step: "p1", nEval: 21, dEval: 126 },
+              { step: "p2", equiv: [1, 6] }
+            ],
+            ans: [1, 6],
+            solHtml: `${f("7 × 3", "9 × 14")} = ${f(21, 126)} → simplificando entre 21 = ${f(1, 6)}`
+          },
+          {
+            id: "d-4",
+            promptHtml: `${f(4,7)} ÷ ${f(2,7)}`,
+            stepsHtml: (id) => `
+              ${fracBox(id, "p1", "med")}
+              <span>=</span>
+              ${fracBox(id, "p2")}
+              <span>→ Simplificado:</span>
+              ${finalFracBox(id)}
+            `,
+            checks: [
+              { step: "p1", nEval: 28, dEval: 14 },
+              { step: "p2", equiv: [2, 1] }
+            ],
+            ans: [2, 1],
+            solHtml: `${f("4 × 7", "7 × 2")} = ${f(28, 14)} = ${f(2, 1)} (2)`
+          },
+          {
+            id: "d-5",
+            promptHtml: `${f(6,11)} ÷ ${f(3,22)}`,
+            stepsHtml: (id) => `
+              ${fracBox(id, "p1", "med")}
+              <span>=</span>
+              ${fracBox(id, "p2")}
+              <span>→ Simplificado:</span>
+              ${finalFracBox(id)}
+            `,
+            checks: [
+              { step: "p1", nEval: 132, dEval: 33 },
+              { step: "p2", equiv: [4, 1] }
+            ],
+            ans: [4, 1],
+            solHtml: `${f("6 × 22", "11 × 3")} = ${f(132, 33)} = ${f(4, 1)} (4)`
+          },
+          {
+            id: "d-6",
+            promptHtml: `${f(2,3)} ÷ ${f(4,5)} ÷ ${f(1,2)}`,
+            stepsHtml: (id) => `
+              <span class="step-badge">1ª div.:</span>
+              ${fracBox(id, "p1", "med")}
+              <span>=</span>
+              ${fracBox(id, "p2")}
+              <span class="step-badge">2ª div. (÷ ${f(1,2)}):</span>
+              ${fracBox(id, "p3", "med")}
+              <span>=</span>
+              <span class="final-tag">Resultado:</span>
+              ${finalFracBox(id)}
+            `,
+            checks: [
+              { step: "p1", nEval: 10, dEval: 12 },
+              { step: "p2", equiv: [5, 6] },
+              { step: "p3", equiv: [5, 3] }
+            ],
+            ans: [5, 3],
+            solHtml: `1ª div.: ${f("2×5", "3×4")} = ${f(10,12)} = ${f(5,6)}; luego ${f(5,6)} ÷ ${f(1,2)} = ${f("5×2", "6×1")} = ${f(10,6)} = ${f(5,3)}`
+          },
+          {
+            id: "d-7",
+            promptHtml: `${f(5,6)} ÷ ${f(1,3)} ÷ ${f(5,4)}`,
+            stepsHtml: (id) => `
+              <span class="step-badge">1ª div.:</span>
+              ${fracBox(id, "p1", "med")}
+              <span>=</span>
+              ${fracBox(id, "p2")}
+              <span class="step-badge">2ª div. (÷ ${f(5,4)}):</span>
+              ${fracBox(id, "p3", "med")}
+              <span>=</span>
+              <span class="final-tag">Resultado:</span>
+              ${finalFracBox(id)}
+            `,
+            checks: [
+              { step: "p1", nEval: 15, dEval: 6 },
+              { step: "p2", equiv: [5, 2] },
+              { step: "p3", equiv: [2, 1] }
+            ],
+            ans: [2, 1],
+            solHtml: `1ª div.: ${f("5×3", "6×1")} = ${f(15,6)} = ${f(5,2)}; luego ${f(5,2)} ÷ ${f(5,4)} = ${f("5×4", "2×5")} = ${f(20,10)} = ${f(2,1)}`
+          },
+          {
+            id: "d-8",
+            promptHtml: `${f(3,8)} ÷ ${f(3,4)} ÷ ${f(1,2)}`,
+            stepsHtml: (id) => `
+              <span class="step-badge">1ª div.:</span>
+              ${fracBox(id, "p1", "med")}
+              <span>=</span>
+              ${fracBox(id, "p2")}
+              <span class="step-badge">2ª div. (÷ ${f(1,2)}):</span>
+              ${fracBox(id, "p3", "med")}
+              <span>=</span>
+              <span class="final-tag">Resultado:</span>
+              ${finalFracBox(id)}
+            `,
+            checks: [
+              { step: "p1", nEval: 12, dEval: 24 },
+              { step: "p2", equiv: [1, 2] },
+              { step: "p3", equiv: [1, 1] }
+            ],
+            ans: [1, 1],
+            solHtml: `1ª div.: ${f("3×4", "8×3")} = ${f(12,24)} = ${f(1,2)}; luego ${f(1,2)} ÷ ${f(1,2)} = ${f("1×2", "2×1")} = ${f(2,2)} = ${f(1,1)}`
+          },
+          {
+            id: "d-9",
+            promptHtml: `${f(7,10)} ÷ ${f(7,5)} ÷ ${f(2,3)}`,
+            stepsHtml: (id) => `
+              <span class="step-badge">1ª div.:</span>
+              ${fracBox(id, "p1", "med")}
+              <span>=</span>
+              ${fracBox(id, "p2")}
+              <span class="step-badge">2ª div. (÷ ${f(2,3)}):</span>
+              ${fracBox(id, "p3", "med")}
+              <span>=</span>
+              <span class="final-tag">Resultado:</span>
+              ${finalFracBox(id)}
+            `,
+            checks: [
+              { step: "p1", nEval: 35, dEval: 70 },
+              { step: "p2", equiv: [1, 2] },
+              { step: "p3", equiv: [3, 4] }
+            ],
+            ans: [3, 4],
+            solHtml: `1ª div.: ${f("7×5", "10×7")} = ${f(35,70)} = ${f(1,2)}; luego ${f(1,2)} ÷ ${f(2,3)} = ${f("1×3", "2×2")} = ${f(3,4)}`
+          },
+          {
+            id: "d-10",
+            promptHtml: `${f(4,9)} ÷ ${f(2,3)} ÷ ${f(4,3)}`,
+            stepsHtml: (id) => `
+              <span class="step-badge">1ª div.:</span>
+              ${fracBox(id, "p1", "med")}
+              <span>=</span>
+              ${fracBox(id, "p2")}
+              <span class="step-badge">2ª div. (÷ ${f(4,3)}):</span>
+              ${fracBox(id, "p3", "med")}
+              <span>=</span>
+              <span class="final-tag">Resultado:</span>
+              ${finalFracBox(id)}
+            `,
+            checks: [
+              { step: "p1", nEval: 12, dEval: 18 },
+              { step: "p2", equiv: [2, 3] },
+              { step: "p3", equiv: [1, 2] }
+            ],
+            ans: [1, 2],
+            solHtml: `1ª div.: ${f("4×3", "9×2")} = ${f(12,18)} = ${f(2,3)}; luego ${f(2,3)} ÷ ${f(4,3)} = ${f("2×3", "3×4")} = ${f(6,12)} = ${f(1,2)}`
+          }
+        ]
+      }
+    ];
+
+    function renderSections() {
+      SECTIONS.forEach((sec) => {
+        const container = document.getElementById(sec.id);
+        container.innerHTML = `
+          <div class="exercises-header">
+            <h4>${sec.title}</h4>
+            <div class="btn-group">
+              <button type="button" class="btn-check" onclick="checkSection('${sec.id}')">Verificar sección</button>
+              <button type="button" class="btn-hint" onclick="toggleSolutions('${sec.id}')">Ver / ocultar solución</button>
+              <button type="button" class="btn-clear" onclick="clearSection('${sec.id}')">Limpiar</button>
+            </div>
+          </div>
+          <p class="helper-note">Completa las casillas del procedimiento (arriba el <strong>numerador</strong> y abajo el <strong>denominador</strong>; puedes escribir operaciones como <code>2×4+3×1</code> o directamente su resultado) y coloca la fracción final en el recuadro azul.</p>
+          ${sec.items.map((item, idx) => `
+            <div class="exercise-item" id="row-${item.id}">
+              <div class="exercise-top-row">
+                <div class="expr-row">
+                  <span class="ex-number">${idx + 1}.</span>
+                  ${item.promptHtml}
+                  <span>=</span>
+                </div>
+                <span class="feedback-badge" id="badge-${item.id}"></span>
+              </div>
+              <div class="workspace-area">
+                ${item.stepsHtml(item.id)}
+              </div>
+              <div class="solution-text" id="sol-${item.id}">
+                <strong>Solución:</strong> ${item.solHtml}
+              </div>
+            </div>
+          `).join("")}
+        `;
+      });
+    }
+
+    function checkStepBox(itemId, chk) {
+      const nEl = document.getElementById(`${itemId}-${chk.step}-n`);
+      const dEl = document.getElementById(`${itemId}-${chk.step}-d`);
+      if (!nEl || !dEl) return true;
+      nEl.classList.remove("correct", "incorrect");
+      dEl.classList.remove("correct", "incorrect");
+
+      const nRaw = nEl.value.trim();
+      const dRaw = dEl.value.trim();
+      if (!nRaw && !dRaw) {
+        // Si lo dejó vacío, lo marcamos como pendiente/incorrecto solo si verificó
+        nEl.classList.add("incorrect");
+        dEl.classList.add("incorrect");
+        return false;
+      }
+
+      let ok = false;
+      if (chk.equiv) {
+        const nv = evalSimpleExpr(nRaw);
+        const dv = evalSimpleExpr(dRaw);
+        if (nv !== null && dv !== null && dv !== 0) {
+          ok = isSameFractionPair(String(nv), String(dv), chk.equiv[0], chk.equiv[1]);
+        }
+      } else {
+        const nv = evalSimpleExpr(nRaw);
+        const dv = evalSimpleExpr(dRaw);
+        const targetN = chk.nEval !== undefined ? chk.nEval : chk.nVal;
+        const targetD = chk.dEval !== undefined ? chk.dEval : chk.dVal;
+        ok = (nv === targetN && dv === targetD);
+      }
+
+      if (ok) {
+        nEl.classList.add("correct");
+        dEl.classList.add("correct");
+      } else {
+        nEl.classList.add("incorrect");
+        dEl.classList.add("incorrect");
+      }
+      return ok;
+    }
+
+    function updateProgress() {
+      let total = 0;
+      let correct = 0;
+      SECTIONS.forEach((sec) => {
+        sec.items.forEach((item) => {
+          total++;
+          const fn = document.getElementById(`${item.id}-final-n`);
+          const fd = document.getElementById(`${item.id}-final-d`);
+          if (fn && fd && isSameFractionPair(fn.value, fd.value, item.ans[0], item.ans[1])) {
+            correct++;
+          }
+        });
+      });
+      const pct = Math.round((correct / total) * 100);
+      document.getElementById("progressBar").style.width = `${pct}%`;
+      document.getElementById("progressLabel").textContent =
+        `Progreso: ${correct} / ${total} ejercicios correctos (${pct}%)`;
+    }
+
+    function checkSection(secId) {
+      const sec = SECTIONS.find((s) => s.id === secId);
+      if (!sec) return;
+      sec.items.forEach((item) => {
+        const badge = document.getElementById(`badge-${item.id}`);
+        let stepsOk = true;
+        (item.checks || []).forEach((chk) => {
+          if (!checkStepBox(item.id, chk)) stepsOk = false;
+        });
+
+        const fn = document.getElementById(`${item.id}-final-n`);
+        const fd = document.getElementById(`${item.id}-final-d`);
+        fn.classList.remove("correct", "incorrect");
+        fd.classList.remove("correct", "incorrect");
+
+        const finalOk = isSameFractionPair(fn.value, fd.value, item.ans[0], item.ans[1]);
+        if (finalOk) {
+          fn.classList.add("correct");
+          fd.classList.add("correct");
+        } else {
+          fn.classList.add("incorrect");
+          fd.classList.add("incorrect");
+        }
+
+        badge.classList.remove("ok", "err");
+        if (finalOk && stepsOk) {
+          badge.classList.add("ok");
+          badge.textContent = "✓ Completo y correcto";
+        } else if (finalOk && !stepsOk) {
+          badge.classList.add("ok");
+          badge.textContent = "✓ Resultado correcto (revisa pasos)";
+        } else {
+          badge.classList.add("err");
+          badge.textContent = "✗ Revisar";
+        }
+      });
+      updateProgress();
+    }
+
+    function toggleSolutions(secId) {
+      const sec = SECTIONS.find((s) => s.id === secId);
+      if (!sec) return;
+      sec.items.forEach((item) => {
+        const sol = document.getElementById(`sol-${item.id}`);
+        sol.classList.toggle("visible");
+      });
+    }
+
+    function clearSection(secId) {
+      const sec = SECTIONS.find((s) => s.id === secId);
+      if (!sec) return;
+      sec.items.forEach((item) => {
+        const row = document.getElementById(`row-${item.id}`);
+        row.querySelectorAll("input").forEach((inp) => {
+          inp.value = "";
+          inp.classList.remove("correct", "incorrect");
+        });
+        const badge = document.getElementById(`badge-${item.id}`);
+        const sol = document.getElementById(`sol-${item.id}`);
+        badge.textContent = "";
+        badge.classList.remove("ok", "err");
+        sol.classList.remove("visible");
+      });
+      updateProgress();
+    }
+
+    renderSections();
+  </script>
+</body>
+</html>
